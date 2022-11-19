@@ -86,3 +86,8 @@ h3
 {
     text-align: center;
 }
+.ToDo
+{
+    display:grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
