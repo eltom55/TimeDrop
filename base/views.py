@@ -5,8 +5,8 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return HttpResponse('home page')
+    return render(request, 'HomePage.html')
 
 
 def calendar(request):
-    return ('Calendar')
+    return render(request, 'CalendarPage.html')
