@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+    <div class = "home">
+        <div>
+        <head>
+            <title>Home Page</title>
+            <link rel = "stylesheet" href="{% static 'styles/Login.css' %}">
+            <a href = "AddCalendar.html">Add Calendar</a>
+        </head>
+        <body>
+            <h3>Home Page</h3>
+            {% for calendar in calendars %}
+            <div class="calendarFormat">
+            <p id = "rcorners3"><a href = "{% url 'calendar' calendar.id %}">{{calendar.name}}</a></p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class = "ToDoBox">
+            
+            <h1 style = "text-align: center;">To-Do list</h1>
+            <a href = "{% url 'addTask' %}">Add task</a>
+            {% for todo in todos %}
+                <div>
+                    <h5>{{todo.id}} -- <a href="{%url 'todo' todo.id%}">{{todo.title}}</a> </h5>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+        </body>
+</html>
