@@ -48,9 +48,9 @@ def addTask(request):
 
     if request.method == 'POST':
         form = TodoForm(request.POST)
-        # if form.is_valid():
-        form.save()
-        return redirect('home')
+        if form.is_valid():
+            form.save()
+            return redirect('home')
 
     context = {'form': form}
     return render(request, 'base/templates/todo_form.html', context)

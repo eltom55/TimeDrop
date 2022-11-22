@@ -8,6 +8,4 @@ urlpatterns = [
     path('todo/<str:pk>/', views.todo, name="todo"),
 
     path('addTask/', views.addTask, name="addTask"),
-
-
 ]
