@@ -1,46 +1,219 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Login</title>
-        <link rel="stylesheet" href = "Login.css">
-    </head>
-    <body>
-        <h3>Welcome to Time Drop!</h3>
-        <form>
-            
-            <h1>Login</h1>
-            <div class = "textBox">
-                <input type ="text" placeholder = "Username" id = "Username">
-                
-            </div>
-            <div class ="textBox">
-                <input type="Password" placeholder = "Password" id = "Password">
-            </div>
-            <br>
-            <button onclick = "validate()" class = "loginBtn" id = "Login">Login</button>
-            <div class = "signup">
-                Don't have an account?
-                </br>
-                <a href="SignUpPage.html">Sign up</a>
-            </div>
-            <script>
-                document.getElementById("Login").onclick = 
-                function validate()
-                {
-                    const userName = document.getElementById("Username").value;
-                    const password = document.getElementById("Password").value;
 
-                    if((userName == "") || (password == ""))
-                    {
-                        alert("One or more fields is empty!");
-                    }
-                    else
-                    {
-                        window.open('HomePage.html', 'newwindow');
-                    }
-                }
-            </script>
-        </form>
-    </body>
+<head>
+  <title>Login</title>
+  <style>
+    * {
+      font-family: sans-serif margin 0;
+      padding: 0;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(#e66465, #9198e5);
+    }
+
+    form {
+
+      width: 350px;
+      height: 800;
+      padding: 75px 50px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 45px;
+      color: navy;
+      font-size: 40px;
+      font-family: verdana;
+      padding: 25px 50px;
+      background: turquoise;
+    }
+
+    .loginBtn {
+      height: 45px;
+      width: 75%;
+      border: none;
+      outline: none;
+      background-size: 150%;
+      background-position: right;
+      font-size: 15px;
+    }
+
+    .signup {
+      color: navy;
+      font-family: verdana;
+      margin-top: 45px;
+      padding: 10px 20px;
+      background-color: lightblue;
+    }
+
+    h3 {
+      text-align: center;
+      font-family: verdana;
+      color: navy;
+      top: 0;
+      font-size: 50px;
+      background: cornflowerblue;
+      border: solid 3px navy;
+    }
+
+    .previousPage {
+      margin-top: 20px;
+    }
+
+    #whole {
+      background: cornflowerblue;
+      text-align: center;
+      border: solid 3px navy;
+    }
+
+    #rcorners3 {
+      border-radius: 25px;
+      background-color: lightblue;
+      background-position: left top;
+      background-repeat: repeat;
+      padding: 20px;
+      width: 200px;
+      height: 150px;
+    }
+
+    #Login {
+      background-color: lightblue;
+      border: solid 1px navy;
+      width: 200px;
+      padding: 5px 5px;
+      margin: 5%;
+      box-shadow: 0 0 5px 1px;
+    }
+
+    input[type=password],
+    input[type=text] {
+      border: solid 1px cornflowerblue;
+      width: 200px;
+      padding: 5px;
+      margin: 5%;
+      box-shadow: 0 0 5px 1px;
+    }
+
+    .calendarFormat {
+      text-align: center;
+    }
+
+    .ToDoBox {
+      border: 1px solid black;
+    }
+
+    .ToDo {
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+    }
+
+    button:hover {
+      border: none;
+      color: green;
+      background-color: lightgreen;
+      box-shadow: 0 0 0px 0px;
+    }
+
+    p {
+      display: none;
+      font-family: verdana;
+      background-color: green;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>Welcome to Time Drop!</h3>
+  <form>
+    <div id='whole'>
+      <h1>Login</h1>
+      <div id='credentials' class="textBox">
+        <input type="text" placeholder="Username" id="Username" onkeypress="active()" onchange="active()"
+          onclick="active()"><br>
+        <input type="password" placeholder="Password" id="Password" onkeypress="active()" onchange="active()"
+          onclick="active()">
+      </div>
+      <br>
+      <button onclick="validate()" class="loginBtn" id="Login">Login</button>
+
+      <span id='pop_up'>
+        <p id='message'></p>
+      </span>
+
+      <div class="signup" id='signup'>
+        Don't have an account?
+        </br>
+        <a href="SignUpPage.html">Sign up</a>
+      </div>
+    </div>
+    <script>
+      document.getElementById("Login").onclick =
+        function validate() {
+          const userName = document.getElementById("Username").value;
+          const password = document.getElementById("Password").value;
+
+          if ((userName == "") || (password == "")) {
+            alert("One or more fields is empty!");
+          }
+          else {
+            window.open('HomePage.html', 'newwindow');
+          }
+        }
+
+      function active() {
+        var username = document.getElementById('Username').value;
+        var password = document.getElementById('Password').value;
+
+        var output_text = document.getElementById('message');
+        output_text.textContent = print_message(username, password);
+      }
+
+      function passwordCheck(password) {
+        var bool = false;
+        (password.length != 0 && password.length >= 8) ? (bool = true) : (bool = false);
+        return bool;
+      }
+
+      function print_message(u, p) {
+        let x = document.getElementById('message');
+        var text = '';
+
+        switch (true) {
+          case u.length != 0 && passwordCheck(p) == true:
+            text = 'Valid credentials';
+            x.style.backgroundColor = 'green';
+            break;
+          case u.length == 0 && passwordCheck(p) == true:
+            text = 'Invalid username';
+            x.style.backgroundColor = 'red';
+            break;
+          case u.length != 0 && passwordCheck(p) == false:
+            text = 'Password must be at least 8 characters';
+            x.style.backgroundColor = 'red';
+            break;
+          case u.length == 0 && passwordCheck(p) == false:
+            text = 'Invalid credentials';
+            x.style.backgroundColor = 'red';
+            break;
+        }
+
+        x.style.display = 'block';
+        return text;
+      }
+    </script>
+  </form>
+</body>
 
 </html>
