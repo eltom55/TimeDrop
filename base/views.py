@@ -13,7 +13,7 @@ from .utils import Calendar
 calendarsPages = [
     {'id': 1, 'name': 'School'},
     {'id': 2, 'name': 'Social'},
-    {'id': 3, 'name': 'health'},
+    {'id': 3, 'name': 'Health'},
 ]
 
 # todos = [
@@ -22,6 +22,11 @@ calendarsPages = [
 #{'id': 3, 'name': 'go to an event'},
 # ]
 
+def login(request):
+    return render(request, 'base/templates/Login.html')
+
+def signup(request):
+    return render(request, 'base/templates/SignUpPage.html')
 
 def home(request):
     todos = Event.objects.all()

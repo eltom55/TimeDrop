@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Add Calendar</title>
-        <link rel = "stylesheet" href = "Login.css">
-    </head>
-    <body>
-        <form>
-            <div class = "previousPage">
-                <a href = "HomePage.html">Previous Page</a>
-            </div>
-        <h4>Name the calendar: </h4>
-        <div class = "textbox">
-            <input type = "text" placeholder = "Name" id = "name">
-        </div>
-        <br>
-        <h4>Choose the color</h4>
-        <label for="colorpicker">Color Picker:</label>
-        <input type="color" id="colorpicker" value="#000000">
-        <br></br>
-        <button onclick = "validate()" id = "submitButton">Submit</button>
 
-    <script>
-        document.getElementById("submitButton").onclick = 
-        function validate()
-        {
-            const calendarName = document.getElementById("name").value;
-            if(calendarName == "")
-            {
-                alert("Enter a name for the calendar!");
-            }
-            else
-            {
-                window.open('HomePage.html', 'newwindow');
-            }
+<head>
+  <title>Add Calendar</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+  <form id='addcalendar'>
+    <div class="previousPage">
+      <a href="HomePage.html">Previous Page</a>
+    </div>
+    <h4>Name the calendar: </h4>
+    <div class="textbox">
+      <input type="text" placeholder="Name" id="name">
+    </div>
+    <br>
+    <h4>Choose the color:</h4>
+    <label for="colorpicker">Color Picker:</label>
+    <br>
+    <br>
+    <input type="color" id="colorpicker" value="#000000">
+    <br></br>
+    <button onclick="validate()" id="submitButton">Submit</button>
+  </form>
+  <script>
+    document.getElementById("submitButton").onclick =
+      function validate() {
+        const calendarName = document.getElementById("name").value;
+        if (calendarName == "") {
+          alert("Enter a name for the calendar!");
         }
-    </script>
-    </form>
-    </body>
+        else {
+          window.open('HomePage.html', 'newwindow');
+        }
+      }
+  </script>
+  </form>
+</body>
+
 </html>
