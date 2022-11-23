@@ -5,7 +5,7 @@ from django.views import generic
 from django.utils.safestring import mark_safe
 
 from .models import *
-from .forms import TodoForm
+from .forms import TodoForms
 from .utils import Calendar
 
 # Create your views here.
@@ -39,6 +39,7 @@ def home(request):
 
 def todo(request, pk):
     todo = Event.objects.get(id=pk)
+    #task = room.CalendarIcon
     context = {'todo': todo}
     return render(request, 'base/templates/todo.html', context)
 
