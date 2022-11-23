@@ -13,7 +13,7 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(#e66465, #9198e5);
+      background: #222342;
     }
 
     form {
@@ -30,11 +30,11 @@
     h1 {
       text-align: center;
       margin-bottom: 45px;
-      color: navy;
+      color: white;
       font-size: 40px;
       font-family: verdana;
       padding: 25px 50px;
-      background: turquoise;
+      background: #191a1f;
     }
 
     .loginBtn {
@@ -48,11 +48,12 @@
     }
 
     .signup {
-      color: navy;
+      color: white;
       font-family: verdana;
       margin-top: 45px;
       padding: 10px 20px;
-      background-color: lightblue;
+      background-color: #191a1f;
+      border-radius: 25px;
     }
 
     h3 {
@@ -70,9 +71,11 @@
     }
 
     #whole {
-      background: cornflowerblue;
+      background: #191a1f;
       text-align: center;
-      border: solid 3px navy;
+      border: solid 3px #191a1f;
+      border-radius: 25px;
+      width: 350px;
     }
 
     #rcorners3 {
@@ -86,8 +89,8 @@
     }
 
     #Login {
-      background-color: lightblue;
-      border: solid 1px navy;
+      background-color: #5467ff;
+      border-radius: 25px;
       width: 200px;
       padding: 5px 5px;
       margin: 5%;
@@ -96,11 +99,14 @@
 
     input[type=password],
     input[type=text] {
-      border: solid 1px cornflowerblue;
-      width: 200px;
-      padding: 5px;
-      margin: 5%;
-      box-shadow: 0 0 5px 1px;
+      border: solid 1px #262a35;
+      width: 250px;
+      height: 50px;
+      padding: 8px;
+      margin: 3%;
+      background-color: #262a35;
+      border-radius: 25px;
+      color: white;
     }
 
     .calendarFormat {
@@ -118,8 +124,8 @@
 
     button:hover {
       border: none;
-      color: green;
-      background-color: lightgreen;
+      color: white;
+      background-color: white;
       box-shadow: 0 0 0px 0px;
     }
 
@@ -131,14 +137,19 @@
       color: white;
       padding: 16px 32px;
     }
+
+    #message
+    {
+      border-radius: 25px;
+    }
+
   </style>
 </head>
 
 <body>
-  <h3>Welcome to Time Drop!</h3>
   <form>
     <div id='whole'>
-      <h1>Login</h1>
+      <h1>Welcome!</h1>
       <div id='credentials' class="textBox">
         <input type="text" placeholder="Username" id="Username" onkeypress="active()" onchange="active()"
           onclick="active()"><br>
