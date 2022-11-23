@@ -87,6 +87,16 @@
             background: #191a1f;
         }
         
+        #message {
+            display: none;
+            font-family: verdana;
+            background-color: green;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 25px;
+         }
+
 
     </style>
 </head>
@@ -117,17 +127,25 @@
         </div>
 
         <div class = "textbox">
-                    <input type = "password" placeholder = "Password" id = "password1">
+                    <input type = "password" placeholder = "Password" id = "password1" onchange='active()' onkeypress="active()"
+                    onclick='active'>
         </div>
 
         <div class = "textbox">
-                    <input type = "password" placeholder = "Confirm Password" id = "password2">
+                    <input type = "password" placeholder = "Confirm Password" id = "password2" onchange='active()' onkeypress="active()"
+                    onclick='active'>
         </div>
+
+        <span>
+            <p id='message'></p>
+        </span>
+
     </br>
         <button onclick = "validate()" class = "loginBtn" id = "submitButton">Submit</button>
 
+
         <div class = "previousPage">
-            <p id="previousLink">Have an Account? <a href = "Login.html">Log In</a></p>
+            <p id="previousLink">Have an Account? <a href = "{%url 'login'%}">Log In</a></p>
         </div>
 
     </div>    
@@ -165,6 +183,56 @@
                         window.open('HomePage.html', 'newwindow');
                     }
                 }
+            }
+
+            function active() {
+                var p = document.getElementById('password1').value;
+                var vp = document.getElementById('password2').value;
+
+                var text = document.getElementById('message');
+                text.textContent = password_verification(p, vp);
+            }
+
+            function lengthCheck(password) {
+                var bool = false;
+                (password.length != 0 && password.length >= 8) ? (bool = true) : (bool = false);
+                return bool;
+            }
+
+            function matchCheck(password, vpassword) {
+                var bool = false;
+                (password == vpassword) ? (bool = true) : (bool = false);
+                return bool;
+            }
+
+            function password_verification(password, vpassword) {
+                let x = document.getElementById('message');
+                let length_check = lengthCheck(password) && lengthCheck(vpassword);
+                let match_check = matchCheck(password, vpassword);
+                let text = ' ';
+
+                switch (true) {
+                    case (length_check == false) && (match_check == false):
+                    x.style.backgroundColor = 'red';
+                    text = 'Passwords are invalid';
+                    break;
+                    case (length_check == false) && (match_check == true):
+                    x.style.backgroundColor = 'red';
+                    text = 'Password must be at least 8 characters long';
+                    break;
+                    case (length_check == true) && (match_check == false):
+                    x.style.backgroundColor = 'red';
+                    text = 'Passwords do not match';
+                    break;
+                    case (length_check == true) && (match_check == true):
+                    x.style.backgroundColor = 'green';
+                    text = 'Valid credentials!';
+                    break;
+                }
+
+                x.style.display = 'block';
+                x.style.textAlign = 'center';
+                return text;
             }
             
         </script>
