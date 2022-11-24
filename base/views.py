@@ -4,8 +4,13 @@ from django.http import HttpResponse
 from django.views import generic
 from django.utils.safestring import mark_safe
 
+<<<<<<< HEAD
 from .models import Event
 from .forms import TodoForms
+=======
+from .models import *
+#from .forms import TodoForm
+>>>>>>> 581036bb82ef7fa231e6c4da9409dad220edf847
 from .utils import Calendar
 
 # Create your views here.
@@ -80,4 +85,3 @@ def get_date(req_day):
         year, month = (int(x) for x in req_day.split('-'))
         return date(year, month, day=1)
     return datetime.today()
-# esfjl;ksafj;
