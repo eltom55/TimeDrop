@@ -24,7 +24,7 @@
             <a href = "{% url 'addTask' %}">Add task</a>
             {% for todo in todos %}
                 <div>
-                    <h5>{{todo.id}} -- <a href="{%url 'todo' todo.id%}">{{todo.title}}</a> </h5>
+                    <h5>{{todo.id}} -- <a href="{%url 'todo' todo.id%}">{{todo.name}}</a> </h5>
                 </div>
             {% endfor %}
         </div>
