@@ -30,6 +30,14 @@ def home(request):
     context = {'calendars': calendarsPages, 'todos': todos}
     return render(request, 'base/templates/HomePage.html', context)
 
+def login(request):
+    context = {'login': login}
+    return render(request, 'base/templates/Login.html', context)
+
+def signup(request):
+    context = {'signup': signup}
+    return render(request, 'base/templates/SignUpPage.html', context)    
+
 
 # def calendar(request, pk):
     # calendar = None
