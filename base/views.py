@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.views import generic
 from django.utils.safestring import mark_safe
 
-from .models import *
+from .models import Event
 from .forms import TodoForms
 from .utils import Calendar
 
@@ -13,7 +13,7 @@ from .utils import Calendar
 calendarsPages = [
     {'id': 1, 'name': 'School'},
     {'id': 2, 'name': 'Social'},
-    {'id': 3, 'name': 'Health'},
+    {'id': 3, 'name': 'health'},
 ]
 
 # todos = [
@@ -22,11 +22,6 @@ calendarsPages = [
 #{'id': 3, 'name': 'go to an event'},
 # ]
 
-def login(request):
-    return render(request, 'base/templates/Login.html')
-
-def signup(request):
-    return render(request, 'base/templates/SignUpPage.html')
 
 def home(request):
     todos = Event.objects.all()
@@ -44,16 +39,15 @@ def home(request):
 
 def todo(request, pk):
     todo = Event.objects.get(id=pk)
-    #task = room.CalendarIcon
     context = {'todo': todo}
     return render(request, 'base/templates/todo.html', context)
 
 
 def addTask(request):
-    form = TodoForm()
+    form = TodoForms()
 
     if request.method == 'POST':
-        form = TodoForm(request.POST)
+        form = TodoForms(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
