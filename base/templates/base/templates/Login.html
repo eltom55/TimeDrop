@@ -147,13 +147,16 @@
 </head>
 
 <body>
-  <form>
+  <form method="POST" action="">
+
+    {% csrf_token %}
+
     <div id='whole'>
       <h1>Welcome!</h1>
       <div id='credentials' class="textBox">
-        <input type="text" placeholder="Username" id="Username" onkeypress="active()" onchange="active()"
+        <input type="text" name="username" placeholder="Username" id="Username" onkeypress="active()" onchange="active()"
           onclick="active()"><br>
-        <input type="password" placeholder="Password" id="Password" onkeypress="active()" onchange="active()"
+        <input type="password" name="password" placeholder="Password" id="Password" onkeypress="active()" onchange="active()"
           onclick="active()">
       </div>
       <br>
@@ -161,6 +164,13 @@
 
       <span id='pop_up'>
         <p id='message'></p>
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
       </span>
 
       <div class="signup" id='signup'>
@@ -179,7 +189,7 @@
             alert("One or more fields is empty!");
           }
           else {
-            window.open('HomePage.html', 'newwindow');
+            //window.open('HomePage.html', 'newwindow');
           }
         }
 

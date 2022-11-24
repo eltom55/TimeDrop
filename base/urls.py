@@ -3,8 +3,9 @@ from .import views
 
 
 urlpatterns = [
-    path('', views.login, name="login"),
-    path('signup/', views.signup, name="signup"),
+    path('', views.loginPage, name="login"),
+    path('logout/', views.logoutPage, name="logout"),
+    path('signUpPage/', views.signUpPage, name="signup"),
     path('home/', views.home, name="home"),
     path('calendar/<str:pk>/', views.CalendarView.as_view(), name="calendar"),
     path('todo/<str:pk>/', views.todo, name="todo"),

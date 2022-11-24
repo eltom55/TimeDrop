@@ -3,11 +3,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import generic
 from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
 
 from .models import *
 from .models import Event
-#from .forms import TodoForm
+from .forms import TodoForms
 from .utils import Calendar
 
 # Create your views here.
@@ -30,12 +33,37 @@ def home(request):
     context = {'calendars': calendarsPages, 'todos': todos}
     return render(request, 'base/templates/HomePage.html', context)
 
-def login(request):
-    context = {'login': login}
+def loginPage(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username = username)
+        except:
+            messages.error(request, 'User does not exist')
+
+        user = authenticate(request, username = username, password = password)   
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Username or Password does not exist')  
+
+    context = {'loginPage': loginPage}
     return render(request, 'base/templates/Login.html', context)
 
-def signup(request):
-    context = {'signup': signup}
+
+def logoutPage(request):
+    logout(request)
+    context = {}
+    return render(request, 'base/templates/Logout.html', context)
+    #return redirect('login')
+
+def signUpPage(request):
+    context = {'signUpPage': signUpPage}
     return render(request, 'base/templates/SignUpPage.html', context)    
 
 
