@@ -4,13 +4,10 @@ from django.http import HttpResponse
 from django.views import generic
 from django.utils.safestring import mark_safe
 
-<<<<<<< HEAD
-from .models import Event
-from .forms import TodoForms
-=======
+
 from .models import *
+from .models import Event
 #from .forms import TodoForm
->>>>>>> 581036bb82ef7fa231e6c4da9409dad220edf847
 from .utils import Calendar
 
 # Create your views here.
