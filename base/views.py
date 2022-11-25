@@ -13,6 +13,8 @@ from .models import Event
 from .forms import TodoForms
 from .utils import Calendar
 
+from .forms import SignUpForm
+
 # Create your views here.
 
 calendarsPages = [
@@ -63,8 +65,30 @@ def logoutPage(request):
     #return redirect('login')
 
 def signUpPage(request):
+
+    #user = request.user
+
+    #if user.is_authenticated:
+        #return HttpResponse("You are already authenticated as {user.username}.")
+
     context = {'signUpPage': signUpPage}
-    return render(request, 'base/templates/SignUpPage.html', context)    
+
+    form = SignUpForm(request.POST)
+    if form.is_valid():
+        form.save()
+        #user.refresh_from_db()
+        #user.profile.first_name = form.cleaned_date.get("firstName")
+        #user.profile.last_name = form.cleaned_date.get("lastName")
+        #user.profile.email = form.cleaned_date.get("email")
+        #user.save()
+        username = form.get('username')
+        password = form.get('password1')
+        #user.save()
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('home')
+
+    return render(request, 'base/templates/SignUpPage.html', {'form': form})    
 
 
 # def calendar(request, pk):
