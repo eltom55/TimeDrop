@@ -81,8 +81,8 @@ def signUpPage(request):
         #user.profile.last_name = form.cleaned_date.get("lastName")
         #user.profile.email = form.cleaned_date.get("email")
         #user.save()
-        username = form.get('username')
-        password = form.get('password1')
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
         #user.save()
         user = authenticate(username=username, password=password)
         login(request, user)
@@ -116,6 +116,10 @@ def addTask(request):
 
     context = {'form': form}
     return render(request, 'base/templates/todo_form.html', context)
+
+def addCalendar(request):
+    context = {}
+    return render(request, 'base/templates/AddCalendar.html')
 
 
 class CalendarView(generic.ListView):
