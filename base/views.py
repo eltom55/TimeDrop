@@ -106,16 +106,22 @@ def todo(request, pk):
 
 
 def addTask(request):
-    form = TodoForms()
-
     if request.method == 'POST':
-        form = TodoForms(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
+        if request.POST.get('eventName') and request.POST.get('dueDate') and request.POST.get('eventTime') and request.POST.get('eventDescription'):
+            post = Event()
+            post.eventName = request.POST.get('eventName')
+            post.dueDate = request.POST.get('dueDate')
+            post.eventTime = request.POST.get('eventTime')
+            post.eventDescription = request.POST.get('eventDescription')
+            post.save()
+
+            return render(request, 'home')
+        else:
+            return render(request, 'home')
+
 
     context = {'form': form}
-    return render(request, 'base/templates/todo_form.html', context)
+    return render(request, 'base/templates/AddEvent.html', context)
 
 def addCalendar(request):
     context = {}
