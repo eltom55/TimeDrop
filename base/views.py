@@ -10,18 +10,20 @@ from django.contrib.auth import authenticate, login, logout
 
 from .models import *
 from .models import Event
-from .forms import TodoForms
+from .models import CalendarSave
+from .forms import TodoForm
+from .forms import CalendarForm
 from .utils import Calendar
 
 from .forms import SignUpForm
 
 # Create your views here.
 
-calendarsPages = [
-    {'id': 1, 'name': 'School'},
-    {'id': 2, 'name': 'Social'},
-    {'id': 3, 'name': 'health'},
-]
+#calendarsModel = [
+ #   {'id': 1, 'name': 'School'},
+  #  {'id': 2, 'name': 'Social'},
+   # {'id': 3, 'name': 'health'},
+#]
 
 # todos = [
 #{'id': 1, 'name': 'work on homework'},
@@ -32,7 +34,10 @@ calendarsPages = [
 
 def home(request):
     todos = Event.objects.all()
-    context = {'calendars': calendarsPages, 'todos': todos}
+    calendars = CalendarSave.objects.all()
+    context = {
+        'calendars': calendars, 
+        'todos': todos}
     return render(request, 'base/templates/HomePage.html', context)
 
 def loginPage(request):
@@ -100,32 +105,42 @@ def signUpPage(request):
     # return render(request, 'base/templates/CalendarPage.html', context)'
 
 def todo(request, pk):
-    todo = Event.objects.get(id=pk)
+    todos = Event.objects.get(id=pk)
     context = {'todo': todo}
     return render(request, 'base/templates/todo.html', context)
+
+def calendarType(request, pk):
+    monthlyCal = CalendarView()
+    todos = Event.objects.all()
+    calendarTypes = CalendarSave.objects.get(id=pk)
+    context = {'calendarType': calendarType, 'todos': todos, 'monthlyCal': monthlyCal}
+    return render(request, 'base/templates/calendar.html', context)
 
 
 def addTask(request):
     if request.method == 'POST':
-        if request.POST.get('eventName') and request.POST.get('dueDate') and request.POST.get('eventTime') and request.POST.get('eventDescription'):
-            post = Event()
-            post.eventName = request.POST.get('eventName')
-            post.dueDate = request.POST.get('dueDate')
-            post.eventTime = request.POST.get('eventTime')
-            post.eventDescription = request.POST.get('eventDescription')
-            post.save()
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = TodoForm()
+        
+    return render(request, 'base/templates/AddEvent.html', {'form': form})
 
-            return render(request, 'home')
-        else:
-            return render(request, 'home')
-
-
-    context = {'form': form}
-    return render(request, 'base/templates/AddEvent.html', context)
 
 def addCalendar(request):
-    context = {}
-    return render(request, 'base/templates/AddCalendar.html')
+
+    if request.method == 'POST':
+        form = CalendarForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = CalendarForm()
+        
+    return render(request, 'base/templates/AddCalendar.html', {'form': form})
+
 
 
 class CalendarView(generic.ListView):

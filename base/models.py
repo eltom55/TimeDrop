@@ -7,29 +7,30 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your models here.
 
 
-class CalendarIcon(models.Model):
-    name = models.CharField(max_length=200)
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Event(models.Model):
     # host = 
     # topic = 
     eventName = models.CharField(max_length=200)
-    dueData = models.DateField()
+    dueDate = models.DateField()
     eventTime = models.TimeField()
     eventDescription = models.TextField(blank=True)
     # participants = 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    #calendarIcon = models.ForeignKey(CalendarIcon, on_delete=models.CASCADE)
+    #calendarModel = models.ForeignKey(CalendarSave, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.eventName
+
+class CalendarSave(models.Model):
+    calendarName = models.CharField(max_length=50)
+    #calendarColor = models.CharField(max_length=10)
+
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.calendarName
 
 #class Profile(models.Model):
  #   user = models.OneToOneField(User, on_delete=models.CASCADE)
