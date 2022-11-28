@@ -10,7 +10,7 @@ urlpatterns = [
 
     path('home/', views.home, name="home"),
 
-    path('calendar/<str:pk>/', views.calendarType, name="calendar"),
+    path('calendar/<str:pk>/', views.CalendarView.as_view(), name="calendar"),
     path('todo/<str:pk>/', views.todo, name="todo"),
 
 

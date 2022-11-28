@@ -6,6 +6,10 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from datetime import datetime, timedelta, date
+import calendar
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from .models import *
@@ -159,6 +163,10 @@ class CalendarView(generic.ListView):
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
+
+        #m = get_date(self.request.GET.get('month', None))
+        #context['prev_month'] = prev_month(m)
+        #context['next_month'] = next_month(m)
         return context
 
 
@@ -167,3 +175,16 @@ def get_date(req_day):
         year, month = (int(x) for x in req_day.split('-'))
         return date(year, month, day=1)
     return datetime.today()
+
+def prev_month(d):
+    first = d.replace(day=1)
+    prev_month = first - timedelta(days=1)
+    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+    return month
+
+#def next_month(d):
+ #   days_in_month = calendar.monthrange(d.year, d.month)[1]
+  #  last = d.replace(day=days_in_month)
+   # next_month = last + timedelta(days=1)
+    #month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+    #return month

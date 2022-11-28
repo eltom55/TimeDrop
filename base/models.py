@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 class Event(models.Model):
     # host = 
     # topic = 
+
     eventName = models.CharField(max_length=200)
     dueDate = models.DateField()
     eventTime = models.TimeField()

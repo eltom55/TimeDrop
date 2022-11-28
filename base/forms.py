@@ -51,7 +51,8 @@ class CalendarForm(forms.ModelForm):
         max_length=50,
         widget = forms.TextInput(attrs={
             'class':'calendarName', 
-            'placeholder':'Enter Name'
+            'placeholder':'Enter Name',
+            'style': 'border: solid 1px #262a35; width: 250px; height: 50px; padding: 10px; margin: 5%; background-color: #262a35; border-radius: 25px; color: white;'
             })
     )
 

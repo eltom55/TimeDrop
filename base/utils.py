@@ -14,6 +14,9 @@ class Calendar(HTMLCalendar):
     def formatday(self, day, events):
         events_per_day = events.filter(dueDate__day=day)
         d = ''
+
+        #task = CalendarSave.event_set.all()
+
         for event in events_per_day:
             d += f'<li> {event.eventName} </li>'
 
