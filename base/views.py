@@ -154,7 +154,7 @@ def addCalendar(request):
 def deleteTask(request, pk):
     event = Event.objects.get(id=pk)
     event.delete()
-    return redirect('base/templates/calendar.html')
+    return redirect('home')
 
 def deleteCal(request, pk):
     cal = CalendarSave.objects.get(id=pk)
